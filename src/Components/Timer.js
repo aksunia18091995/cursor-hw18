@@ -53,11 +53,13 @@ class Timer extends Component {
     };
 
     tick = () => {
-        if (this.state.time <= 0) {
+        const newTime = this.state.time - this.props.step;
+
+        if (newTime <= 0) {
             this.pauseTimer();
             this.props.onTimeEnd();
+            this.setState({ time: 0 });
         } else {
-            const newTime = this.state.time - this.props.step;
             this.setState({ time: newTime });
             this.props.onTick(this.formatTime(newTime));
         }
